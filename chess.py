@@ -110,6 +110,27 @@ def convert_to_fen(board_dict):
     """
     Convert the dictionary to FEN string and return the string"""
     print("Here the dictionary is converted to the fen string for the display")
+    columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    rows = ['8', '7', '6', '5', '4', '3', '2', '1']
+    board_fen = ''
+    for row in rows:
+        blank_count = 0
+        fen_row = ''
+        for col in columns:
+            piece = board_dict.get(col+row)
+            if piece == ' ':
+                blank_count += 1
+                if blank_count == 8:
+                    fen_row = fen_row + blank_count
+            else:
+                if blank_count > 0:
+                    fen_row = fen_row + blank_count
+                    blank_count = 0
+                fen_row = fen_row + piece
+        board_fen = board_fen + fen_row
+        if row != 1:
+            board_fen = board_fen + '/'
+
 
 ########################################################################################
 # BASIC COMMANDS FOR THE CHESS BOARD DISPLAY
